@@ -1,13 +1,15 @@
 import React from "react";
+import { addDefaultSrc } from "../Utils/commonValue";
 
 const SuggationCard = ({ info }) => {
   //   console.log(">>>>>", info);
   const { snippet, statistics } = info;
   const { title, channelTitle, thumbnails, channelId } = snippet;
-  const { likeCount, viewCount } = statistics;
+  const { likeCount, viewCount } = statistics || [];
   return (
     <div className=" h-28 w-96 p-2 m-2 flex overflow-hidden">
       <img
+        onError={addDefaultSrc}
         className="rounded-lg"
         src={thumbnails?.default?.url}
         alt="Video Thumbnail"

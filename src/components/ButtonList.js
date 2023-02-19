@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { YOUTUBE_CATEGORY_API } from "../Utils/contants";
+import { Link } from "react-router-dom";
+import { YOUTUBE_CATEGORY_API } from "../Utils/ApiGenerator";
 import Button from "./Button";
 
 function ButtonList() {
@@ -10,54 +11,26 @@ function ButtonList() {
   }, []);
 
   const getCategory = async () => {
-    const data = await fetch(YOUTUBE_CATEGORY_API);
-    const json = await data.json();
-    // console.log(">>>>>>YOUTUBE_CATEGORY_API>>", json);
-    SetCategoryList(json?.items);
+    const response = await YOUTUBE_CATEGORY_API();
+    SetCategoryList(response);
+  };
+  const buttonClickHandler = async (value) => {
+    console.log(">>>>>>value>", value);
   };
 
   return (
-    <div className="flex overflow-auto whitespace-nowrap m-2">
+    <div className="flex overflow-auto whitespace-nowrap m-2 scrollbar-hide shadow-sm">
       {categoryList &&
         categoryList.map((value) => {
-          return <Button key={value.id} name={value?.snippet?.title} />;
+          return (
+            <Link key={value.id} to={"/search?search=" + value?.snippet?.title}>
+              <Button
+                name={value?.snippet?.title}
+                onClick={() => buttonClickHandler(value)}
+              />
+            </Link>
+          );
         })}
-      {/* <Button name="All" />
-      <Button name="Music" />
-      <Button name="Coocking" />
-      <Button name="Cricket" />
-      <Button name="Songs" />
-      <Button name="Food" />
-      <Button name="Valentine" />
-      <Button name="cricket" />
-      <Button name="Live" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" />
-      <Button name="Cricket" /> */}
     </div>
   );
 }

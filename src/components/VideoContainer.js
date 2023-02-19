@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { YOUTUBE_API_URL } from "../Utils/contants";
+import { YOUTUBE_API_URL } from "../Utils/ApiGenerator";
 import VideoCard from "./VideoCard";
 
 function VideoContainer() {
@@ -17,13 +17,18 @@ function VideoContainer() {
   };
 
   return (
-    <div className="flex flex-wrap justify-start items-center">
+    <div className="flex flex-wrap justify-start items-center ">
       {videos &&
-        videos.map((video) => (
-          <Link to={"/watch?v=" + video.id} key={video.id}>
-            <VideoCard info={video} />
-          </Link>
-        ))}
+        videos.map((video) => {
+          return (
+            <Link
+              to={"/watch?v=" + video.id + "&chid=" + video?.snippet?.channelId}
+              key={video.id}
+            >
+              <VideoCard info={video} />
+            </Link>
+          );
+        })}
     </div>
   );
 }

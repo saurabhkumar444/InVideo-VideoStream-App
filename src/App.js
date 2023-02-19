@@ -4,38 +4,10 @@ import "./App.css";
 import Body from "./components/Body";
 import Head from "./components/Head";
 import MainContainer from "./components/MainContainer";
+import SearchResultContainer from "./components/SearchResult/SearchResultContainer";
 import WatchPage from "./components/WatchPage";
 import store from "./Utils/store";
 
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Body />,
-    children: [
-      {
-        path: "/",
-        element: <MainContainer />,
-      },
-      {
-        path: "watch",
-        element: <WatchPage />,
-      },
-    ],
-  },
-]);
-
-function App() {
-  return (
-    <Provider store={store}>
-      <div>
-        <Head />
-        <RouterProvider router={appRouter} />
-      </div>
-    </Provider>
-  );
-}
-
-export default App;
 /**
  * Head
  * Body
@@ -46,3 +18,41 @@ export default App;
  *    Video conatainer
  *      Video Cards
  */
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        <Head />
+        <Body />
+      </>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <MainContainer />,
+      },
+      {
+        path: "watch",
+        element: <WatchPage />,
+      },
+      {
+        path: "search",
+        element: <SearchResultContainer />,
+      },
+    ],
+  },
+]);
+
+function App() {
+  return (
+    <Provider store={store}>
+      <div>
+        {/* <Head /> */}
+        <RouterProvider router={appRouter} />
+      </div>
+    </Provider>
+  );
+}
+
+export default App;

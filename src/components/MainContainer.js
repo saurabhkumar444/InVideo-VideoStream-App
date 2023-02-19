@@ -4,8 +4,8 @@ import VideoContainer from "./VideoContainer";
 
 function MainContainer() {
   return (
-    <div className=" overflow-x-auto ">
-      <ButtonList />
+    <div className=" overflow-x-auto  ">
+      {/* <ButtonList /> */}
       <VideoContainer />
     </div>
   );
