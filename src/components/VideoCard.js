@@ -13,7 +13,7 @@ const VideoCard = ({ info }) => {
   const { title, channelTitle, thumbnails, channelId } = snippet;
   const { likeCount, viewCount } = statistics;
   return (
-    <div className="rounded-lg p-2 m-2 w-64 h-72 shadow hover:border-2 hover:shadow-xl   border-gray-500">
+    <div className="rounded-lg p-2 m-2 w-60 h-72 shadow hover:border-2 hover:shadow-xl   border-gray-500">
       <img
         onError={addDefaultSrc}
         className="rounded-lg"
@@ -29,22 +29,24 @@ const VideoCard = ({ info }) => {
               src={"https://i.ytimg.com/vi/" + info.id + "/mqdefault.jpg"}
               alt="Chaneel logo"
             />
-            <div className="pl-2">{channelTitle}</div>
+            <div className="pl-2 truncate">{channelTitle}</div>
           </div>
         </li>
         <li className="font-bold truncate "> {title}</li>
         <li>
           <div className="flex">
             {kFormatter(viewCount)} views
-            <span className="pl-2">
+            <span className="pl-2 items-center justify-center flex">
               <img
                 onError={addDefaultSrc}
-                className="h-6 w-6"
+                className="h-5 w-5 my-1"
                 src={require("../assest/like.png")}
                 alt="likes"
               />
+              <div className="px-2">
+                {likeCount && `${kFormatter(likeCount)}`}
+              </div>
             </span>
-            {likeCount && `${kFormatter(likeCount)}`}
           </div>
         </li>
       </ul>

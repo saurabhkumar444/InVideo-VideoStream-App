@@ -8,7 +8,7 @@ const SearchResultSuggation = ({ info }) => {
   return (
     <div className=" h-[200px] my-2 w-full p-2 flex justify-center content-center ">
       <div className="w-full flex ">
-        <div className="w-96">
+        <div className="w-72 bg-fuchsia-200">
           <img
             onError={addDefaultSrc}
             className={`border border-black h-full ${
@@ -18,8 +18,8 @@ const SearchResultSuggation = ({ info }) => {
             alt="Video Thumbnail"
           />
         </div>
-        <div className=" w-full p-2">
-          <div className="overflow-clip font-bold">{title}</div>
+        <div className=" w-10/12 p-2 bg-fuchsia-100">
+          <div className="overflow-clip font-bold truncate">{title}</div>
           <div className="flex py-2">
             <img
               width={30}

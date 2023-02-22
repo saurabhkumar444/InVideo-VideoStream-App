@@ -1,38 +1,35 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addDefaultSrc, SideBarList } from "../Utils/commonValue";
 
 function SideBar() {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   if (!isMenuOpen) return null;
   return (
-    <div className="p-5 shadow-lg w-48">
-      <ul>
-        <li>
-          <Link to={"/"}>Home</Link>
-        </li>
-        <li>Reel</li>
-        <li>Short</li>
-        <li>Video</li>
-        <li>Live</li>
-      </ul>
-      <h1 className="font-bold py-5"> Subscritpion</h1>
-      <ul>
-        <li>Music</li>
-        <li>sport</li>
-        <li>gamming</li>
-        <li>comandy</li>
-        <li>Moivr</li>
-        <li>Reel</li>
-      </ul>
-      <h1 className="font-bold py-5"> Watch Latter</h1>
-      <ul>
-        <li>Music</li>
-        <li>sport</li>
-        <li>gamming</li>
-        <li>comandy</li>
-        <li>Moivr</li>
-        <li>Reel</li>
+    <div className="px-5 shadow-lg w-27  ">
+      <ul className="">
+        {SideBarList.map((value) => {
+          return value?.title?.length === 0 ? (
+            <div key={value?.id} className="w-[100%] h-[2px] bg-gray-100"></div>
+          ) : (
+            <li key={value?.id} className=" justify-center ">
+              <Link
+                to={
+                  value?.id === "home" ? "/" : "/search?search=" + value?.title
+                }
+              >
+                <img
+                  src={value?.src}
+                  onError={addDefaultSrc}
+                  className="h-7 mt-5 pl-3"
+                  alt="Home"
+                />
+                {value.title}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
