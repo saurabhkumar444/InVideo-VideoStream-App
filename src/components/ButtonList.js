@@ -19,7 +19,7 @@ function ButtonList() {
   };
 
   return (
-    <div className="flex overflow-auto whitespace-nowrap m-2 scrollbar-hide shadow-sm">
+    <div className="flex overflow-auto whitespace-nowrap m-2 scrollbar-hide ">
       {categoryList &&
         categoryList.map((value) => {
           return (

@@ -17,7 +17,7 @@ function VideoContainer() {
   };
 
   return (
-    <div className="flex flex-wrap justify-start items-center ">
+    <div className="flex flex-wrap justify-center items-center ">
       {videos &&
         videos.map((video) => {
           return (

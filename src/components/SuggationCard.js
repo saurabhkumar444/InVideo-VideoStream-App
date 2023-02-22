@@ -7,14 +7,14 @@ const SuggationCard = ({ info }) => {
   const { title, channelTitle, thumbnails, channelId } = snippet;
   const { likeCount, viewCount } = statistics || [];
   return (
-    <div className=" h-28 w-96 p-2 m-2 flex overflow-hidden">
+    <div className="h-28 w-full p-2 m-2 flex   ">
       <img
         onError={addDefaultSrc}
         className="rounded-lg"
         src={thumbnails?.default?.url}
         alt="Video Thumbnail"
       />
-      <div className="pl-2 mr-2 ">
+      <div className="pl-2 mr-2 overflow-hidden ">
         <ul>
           <li className="font-bold truncate"> {title}</li>
           <li>{channelTitle}</li>

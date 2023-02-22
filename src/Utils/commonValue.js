@@ -20,10 +20,6 @@ export const SideBarList = [
     id: "library",
   },
   {
-    id: "bar1",
-    title: "",
-  },
-  {
     src: "https://static.vecteezy.com/system/resources/previews/006/217/950/original/fire-outline-icon-with-three-tongues-of-flame-vector.jpg",
     title: "Trending",
     id: "trending",
@@ -47,10 +43,6 @@ export const SideBarList = [
     src: "https://cdn.iconscout.com/icon/free/png-512/videos-movies-music-theater-video-player-30439.png?f=avif&w=512",
     title: "Moive",
     id: "moive",
-  },
-  {
-    id: "bar2",
-    title: "",
   },
   {
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXLdlkaGRLoI5bI165A2w9cjtV8HqjfVdPUQ&usqp=CAU",

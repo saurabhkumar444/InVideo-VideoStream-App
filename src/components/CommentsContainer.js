@@ -6,14 +6,14 @@ const Commont = ({ snippet }) => {
   //   const { name, text, replies } = data;
   const { textOriginal, authorDisplayName, authorProfileImageUrl } = snippet;
   return (
-    <div className="flex shadow-sm p-2 bg-gray-100 rounded-lg m-1">
+    <div className="flex shadow-sm  bg-gray-100 rounded-lg m-1items-start overflow-auto">
       <img
         onError={addDefaultSrc}
-        className="h-12 w-12 rounded-full"
+        className="h-12 w-12 rounded-full m-1"
         src={authorProfileImageUrl}
         alt="logo"
       />
-      <div className="px-3">
+      <div className="pl-2">
         <h1 className="font-bold">{authorDisplayName}</h1>
         <h2>{textOriginal}</h2>
       </div>
@@ -24,7 +24,7 @@ const Commont = ({ snippet }) => {
 const CommontsList = ({ comments }) => {
   return comments.map((value) => {
     return (
-      <div key={value.id}>
+      <div key={value.id} className="p-1">
         <Commont snippet={value?.snippet?.topLevelComment?.snippet} />
         <div className="pl-5 border border-l-black ml-5">
           {value?.replies &&

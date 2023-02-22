@@ -25,7 +25,7 @@ const VideoCard = ({ info }) => {
           <div className="flex p-2 ">
             <img
               onError={addDefaultSrc}
-              className="h-5 w-5"
+              className="h-5 w-5 rounded-full"
               src={"https://i.ytimg.com/vi/" + info.id + "/mqdefault.jpg"}
               alt="Chaneel logo"
             />

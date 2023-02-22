@@ -8,19 +8,39 @@ import SearchResultContainer from "./SearchResult/SearchResultContainer";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonList from "./ButtonList";
 
+const SearchSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className="w-5 h-5 mr-2 text-gray-500 inline"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+  );
+};
+
 function Head() {
   const [searchValue, setSearcValue] = useState("");
   const [searchSuggestion, setSearchSuggestion] = useState("");
   const [showSuggestion, setShowSuggestion] = useState(false);
 
-  const searchCache = useSelector((store) => store.search);
+  // const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   useEffect(() => {
     const settime = setTimeout(() => {
-      if (searchCache[searchValue]) {
-        setSearchSuggestion(searchCache[searchValue]);
-      } else getSearchSuggestions();
+      // if (searchCache[searchValue]) {
+      //   setSearchSuggestion(searchCache[searchValue]);
+      // } else
+      getSearchSuggestions();
     }, 200);
     return () => {
       clearTimeout(settime);
@@ -35,11 +55,11 @@ function Head() {
     setSearchSuggestion(json[1]);
     // setShowSuggestion(true);
     // update in redux
-    dispatch(
-      cacheResult({
-        [searchValue]: json[1],
-      })
-    );
+    // dispatch(
+    //   cacheResult({
+    //     [searchValue]: json[1],
+    //   })
+    // );
   };
 
   const toggleMenuHandler = () => {
@@ -52,14 +72,14 @@ function Head() {
   }, []);
 
   return (
-    <div className="">
-      <div className="grid grid-flow-col p-5 shadow-lg w-full  items-center ">
-        <div className="flex col-span-1  items-center">
+    <div className=" bg-white z-50">
+      <div className="justify-between flex pl-5   items-center  ">
+        <div className="flex items-center  ">
           <img
             onError={addDefaultSrc}
             onClick={toggleMenuHandler}
             className="h-8 cursor-pointer"
-            src="https://static.vecteezy.com/system/resources/thumbnails/002/292/406/small/hamburger-menu-line-icon-free-vector.jpg"
+            src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2012/10/threelines.png"
             alt="logo"
           />
           <a href="/">
@@ -71,8 +91,8 @@ function Head() {
             />
           </a>
         </div>
-        <div className="col-span-10 px-10">
-          <div>
+        <div className=" relative px-10 w-10/12 ">
+          <div className="flex">
             <input
               className="w-1/2 border border-gray-500 p-2 rounded-l-full"
               type="search"
@@ -89,36 +109,39 @@ function Head() {
                 setSearcValue(searchValue);
               }}
             >
-              Search
+              <SearchSVG />
             </button>
-            {showSuggestion && searchSuggestion && (
-              <div className="absolute bg-slate-100 py-2 shadow-lg rounded-lg w-1/2 boder border-gray-100">
-                <ul>
-                  {searchSuggestion.map((value, index) => {
-                    return (
-                      <li
-                        key={value}
-                        className=" border border-b-slate-600 p-2 hover:bg-gray-500"
-                        id={value}
-                        onBlur={() => {
-                          setShowSuggestion(false);
-                        }}
-                        onClick={() => {
-                          setShowSuggestion(false);
-                          setSearcValue(value);
-                        }}
-                        name={value}
-                      >
-                        <Link to={"/search?search=" + value}>{value}</Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
           </div>
+          {showSuggestion && searchSuggestion && (
+            <div className="absolute bg-slate-100 py-2 shadow-lg rounded-lg w-1/2 boder border-gray-100">
+              <ul>
+                {searchSuggestion.map((value, index) => {
+                  return (
+                    <li
+                      key={value}
+                      className=" border border-b-slate-600 p-2 hover:bg-gray-500"
+                      id={value}
+                      onBlur={() => {
+                        setShowSuggestion(false);
+                      }}
+                      onClick={() => {
+                        setShowSuggestion(false);
+                        setSearcValue(value);
+                      }}
+                      name={value}
+                    >
+                      <Link to={"/search?search=" + value}>
+                        <SearchSVG />
+                        {value}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
-        <div className="col-span-1">
+        <div className=" px-5">
           <img
             className="h-6"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzTIrXK_AJsi-yi6E9yNamVlhURSjgdMgwn2qqxCepqObqP0EGLoEXSdGwwuzA9k6Cnc&usqp=CAU"
