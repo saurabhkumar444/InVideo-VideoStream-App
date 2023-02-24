@@ -13,14 +13,14 @@ const SearchResultContainer = () => {
 
   const getsearchResult = async () => {
     const response = await youtubeGetSearchValueAPI(searchValue);
-    console.log(">>>>>", response);
+    // console.log(">>>>>", response);
     setSuggest(response);
   };
   return (
     <div className="m-2">
       {sugested &&
         sugested.map((value) => {
-          console.log(">>>>>>>>>", value);
+          // console.log(">>>>>>>>>", value);
           return (
             <Link
               to={
