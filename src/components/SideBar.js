@@ -11,8 +11,8 @@ function SideBar() {
       <ul className=" ">
         {SideBarList.map((value) => {
           return (
-            <div className="">
-              <li key={value?.id} className=" justify-center items-center">
+            <div key={value?.id} className="">
+              <li className=" justify-center items-center">
                 <Link
                   to={
                     value?.id === "home"
