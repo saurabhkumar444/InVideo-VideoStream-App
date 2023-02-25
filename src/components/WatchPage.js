@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { closedMenu } from "../Utils/appSlice";
-import { YOUTUBE_API_URL } from "../Utils/ApiGenerator";
+import {
+  getSelectedVideoDetails,
+  youtubeSelectedVideo,
+  YOUTUBE_API_URL,
+} from "../Utils/ApiGenerator";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
 import SuggationCard from "./SuggationCard";
 import { addDefaultSrc } from "../Utils/commonValue";
 import Button from "./Button";
+import { selectedVideoData } from "../Utils/selectedVideoSlice";
+import ChannelDetailscard from "./ChannelDetailscard";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const youTubeVideoId = searchParams.get("v");
   const youTubeVideochannelId = searchParams.get("chid");
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(closedMenu());
-  }, []);
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  console.log("youTubeVideochannelId", youTubeVideoId, youTubeVideochannelId);
   const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    getVideo();
-  }, []);
+  const getSelectedVideo = useCallback(async () => {
+    const response = await getSelectedVideoDetails(youTubeVideoId);
+    dispatch(selectedVideoData(response));
+    setSelectedVideo(response);
+    console.log("=----------------", response);
+  }, [youTubeVideochannelId]);
 
   const getVideo = async () => {
     const data = await fetch(YOUTUBE_API_URL);
@@ -30,70 +38,60 @@ const WatchPage = () => {
     setVideos(json?.items);
   };
 
+  useEffect(() => {
+    getSelectedVideo();
+    dispatch(closedMenu());
+  }, [youTubeVideochannelId]);
+
+  useEffect(() => {
+    getVideo();
+  }, []);
+
   return (
-    <div className="p-5  h-[100%] w-[100%] flex ">
+    <div
+      className={`p-2 h-[100%] ${
+        isMenuOpen ? "w-[calc(100%-5rem)]" : "w-full"
+      }`}
+    >
       <div className="">
-        <div>
-          <iframe
-            // width="800"
-            height="500"
-            className="w-[100%] object-cover  "
-            src={
-              "https://www.youtube.com/embed/" + youTubeVideoId + "?autoplay=1"
-            }
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+        <iframe
+          // width="800"
+          height="500"
+          className="w-full object-cover  "
+          src={
+            "https://www.youtube.com/embed/" + youTubeVideoId + "?autoplay=1"
+          }
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+        <div className="">
+          {selectedVideo?.length && (
+            <ChannelDetailscard chennelData={selectedVideo[0]} />
+          )}
         </div>
-        <div className=" w-full h-24">
-          <div className=" p-2 text-lg font-bold">
-            KAPIL Sharma & Funny Indian Memes 🤣 (MEME REVIEW)
-          </div>
-          <div className="flex bg-blue-500w-full pl-5 items-center">
-            <div className="flex items-center">
-              <img
-                onError={addDefaultSrc}
-                className="rounded-lg h-12 w-12"
-                src={
-                  "https://yt3.ggpht.com/ytc/AL5GRJU9-glB9qZjVdxCIHqqoXwPRnunLq58thueX4G9=s88-c-k-c0x00ffffff-no-rj"
-                }
-                alt="Logo"
-              />
-              <span className="text-x font-bold pl-2">D-MonchiK </span>
-              <Button
-                style=" bg-red-900 font-bold ml-5"
-                name={"Subscribe"}
-                onClick={() => alert("Subscribe ")}
-              />
-            </div>
-            <div className="bg-fuchsia-200 w-96"></div>
-          </div>
+      </div>
+
+      <div className=" md:grid md:grid-cols-3 ">
+        <div className="md:col-span-2 ">
+          <CommentsContainer youTubeVideochannelId={youTubeVideochannelId} />
         </div>
-        <div className=" md:grid md:grid-cols-3 ">
-          <div className="md:col-span-2 ">
-            <CommentsContainer youTubeVideochannelId={youTubeVideochannelId} />
-          </div>
-          <div className="w-full pt-5 ">
-            {/* <div>
+        <div className="w-full pt-2 ">
+          {/* <div>
               <LiveChat />
             </div> */}
-            <div className="font-bold ">Suggation:</div>
-            {videos &&
-              videos.map((video) => (
-                <Link
-                  key={video.id}
-                  to={
-                    "/watch?v=" +
-                    video.id +
-                    "&chid=" +
-                    video?.snippet?.channelId
-                  }
-                >
-                  <SuggationCard info={video} />
-                </Link>
-              ))}
-          </div>
+          <div className="font-bold text-xl">Suggation:</div>
+          {videos &&
+            videos.map((video) => (
+              <Link
+                key={video.id}
+                to={
+                  "/watch?v=" + video.id + "&chid=" + video?.snippet?.channelId
+                }
+              >
+                <SuggationCard info={video} />
+              </Link>
+            ))}
         </div>
       </div>
     </div>

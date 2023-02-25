@@ -15,7 +15,7 @@ function ButtonList() {
     SetCategoryList(response);
   };
   const buttonClickHandler = async (value) => {
-    console.log(">>>>>>value>", value);
+    // console.log(">>>>>>value>", value);
   };
 
   return (
@@ -23,7 +23,11 @@ function ButtonList() {
       {categoryList &&
         categoryList.map((value) => {
           return (
-            <Link key={value.id} to={"/search?search=" + value?.snippet?.title}>
+            <Link
+              key={value.id}
+              to={"/search?search=" + value?.snippet?.title}
+              className="pl-1"
+            >
               <Button
                 name={value?.snippet?.title}
                 onClick={() => buttonClickHandler(value)}
