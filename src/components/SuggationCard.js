@@ -2,7 +2,6 @@ import React from "react";
 import { addDefaultSrc } from "../Utils/commonValue";
 
 const SuggationCard = ({ info }) => {
-  //   console.log(">>>>>", info);
   const { snippet, statistics } = info;
   const { title, channelTitle, thumbnails, channelId } = snippet;
   const { likeCount, viewCount } = statistics || [];

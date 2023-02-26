@@ -5,7 +5,7 @@ const Button = (props) => {
   return (
     <div>
       <button
-        className={`${style} px-5 py-1 bg-gray-200 rounded-full`}
+        className={`${style} px-5 py-1 bg-gray-200 rounded-full border hover:border-2`}
         onClick={onClick}
       >
         {name}

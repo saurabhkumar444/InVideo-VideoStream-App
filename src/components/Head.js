@@ -84,7 +84,7 @@ function Head() {
             <img
               onError={addDefaultSrc}
               className="h-16 pl-2 w-full"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0rDXVskQ0ddTLjPUo5RrVCvxEwoxRcAXsnI1m_LSP6dIEpqQu9OgoVW5DyxHBeA29bg&usqp=CAU"
+              src="https://dottotech.com/wp-content/uploads/2020/08/invideo-logo-v2.png"
               alt="Youtube logo"
             />
           </a>
@@ -140,8 +140,8 @@ function Head() {
         </div>
         <div className=" px-5">
           <img
-            className="h-6"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzTIrXK_AJsi-yi6E9yNamVlhURSjgdMgwn2qqxCepqObqP0EGLoEXSdGwwuzA9k6Cnc&usqp=CAU"
+            className="h-10 rounded-[100%]"
+            src="https://yt3.ggpht.com/yti/AHXOFjVHV_dg4EFV-EAAZfLwvxKKxUU3jmfrksmKAixd=s88-c-k-c0x00ffffff-no-rj-mo"
             alt="Youtube logo"
           />
         </div>

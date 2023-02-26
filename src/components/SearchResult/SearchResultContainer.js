@@ -23,7 +23,6 @@ const SearchResultContainer = () => {
     <div className={`m-2 ${isMenuOpen ? "w-[calc(100%-5rem)]" : "w-full"}`}>
       {sugested &&
         sugested.map((value) => {
-          console.log(value);
           return (
             <div className="" key={value.etag}>
               <SearchResultSuggation info={value} />

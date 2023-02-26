@@ -1,19 +1,13 @@
 import { getByTitle } from "@testing-library/react";
 import React from "react";
-import { addDefaultSrc } from "../Utils/commonValue";
-
-function kFormatter(num) {
-  return Math.abs(num) > 999
-    ? Math.sign(num) * (Math.abs(num) / 10000).toFixed(1) + "k"
-    : Math.sign(num) * Math.abs(num);
-}
+import { addDefaultSrc, kFormatter } from "../Utils/commonValue";
 
 const VideoCard = ({ info }) => {
   const { snippet, statistics } = info;
   const { title, channelTitle, thumbnails, channelId } = snippet;
   const { likeCount, viewCount } = statistics;
   return (
-    <div className="rounded-lg p-2 m-2 w-60 h-72 shadow hover:border-2 hover:shadow-xl   border-gray-500">
+    <div className="rounded-lg p-2 m-2 w-60 h-72 shadow hover:border-[1px] hover:shadow-xl   border-gray-500">
       <img
         onError={addDefaultSrc}
         className="rounded-lg"

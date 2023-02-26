@@ -65,3 +65,9 @@ export const SideBarList = [
     id: "fashionandbeauty",
   },
 ];
+
+export function kFormatter(num) {
+  return Math.abs(num) > 999
+    ? Math.sign(num) * (Math.abs(num) / 10000).toFixed(1) + "k"
+    : Math.sign(num) * Math.abs(num);
+}

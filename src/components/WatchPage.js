@@ -20,7 +20,6 @@ const WatchPage = () => {
   const youTubeVideoId = searchParams.get("v");
   const youTubeVideochannelId = searchParams.get("chid");
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  console.log("youTubeVideochannelId", youTubeVideoId, youTubeVideochannelId);
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState([]);
   const dispatch = useDispatch();
@@ -29,8 +28,7 @@ const WatchPage = () => {
     const response = await getSelectedVideoDetails(youTubeVideoId);
     dispatch(selectedVideoData(response));
     setSelectedVideo(response);
-    console.log("=----------------", response);
-  }, [youTubeVideochannelId]);
+  }, [youTubeVideoId]);
 
   const getVideo = async () => {
     const data = await fetch(YOUTUBE_API_URL);
@@ -41,7 +39,7 @@ const WatchPage = () => {
   useEffect(() => {
     getSelectedVideo();
     dispatch(closedMenu());
-  }, [youTubeVideochannelId]);
+  }, [youTubeVideoId]);
 
   useEffect(() => {
     getVideo();

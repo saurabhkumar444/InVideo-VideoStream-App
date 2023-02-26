@@ -1,5 +1,6 @@
 // const API_KEY = "AIzaSyAI9FhAS1ilSj9RM6U8-gKJ3_CJxq89x_0";
-const API_KEY = "AIzaSyBs6LBSX9iuWHDvBKKWmpZQGVtYvi--dmo";
+const API_KEY = "AIzaSyBow2loALOn_ZNozHzdjWvxINBFutgEIfk";
+// const API_KEY = "AIzaSyBs6LBSX9iuWHDvBKKWmpZQGVtYvi--dmo";
 
 export const YOUTUBE_API_URL =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
@@ -39,7 +40,7 @@ export const youtubeGetSearchValueAPI = async (value) => {
   return json?.items;
 };
 
-export const youtubeSelectedVideo = async (value) => {
+export const getSelectedChennelDetails = async (value) => {
   const data = await fetch(
     "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=" +
       value +
@@ -53,6 +54,17 @@ export const youtubeSelectedVideo = async (value) => {
 export const getSelectedVideoDetails = async (value) => {
   const data = await fetch(
     "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=" +
+      value +
+      "&key=" +
+      API_KEY
+  );
+  const json = await data.json();
+  return json?.items;
+};
+
+export const getSelectedChannelVideoList = async (value) => {
+  const data = await fetch(
+    "https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&&maxResults=10&channelId=" +
       value +
       "&key=" +
       API_KEY

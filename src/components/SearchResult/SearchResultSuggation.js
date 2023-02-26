@@ -15,11 +15,18 @@ const SearchResultSuggation = ({ info }) => {
       navigate("/watch?v=" + id?.videoId + "&chid=" + snippet?.channelId);
     }
   };
+
   return (
     <div className=" h-[200px] my-2 w-full p-2 flex justify-center content-center ">
       <div className="w-full flex md:flex-none ">
         <div className="w-72">
-          <Link to={"/watch?v=" + id?.videoId + "&chid=" + snippet?.channelId}>
+          <Link
+            to={
+              id?.kind === "youtube#channel"
+                ? "/channelname?chnameid=" + snippet?.channelId
+                : "/watch?v=" + id?.videoId + "&chid=" + snippet?.channelId
+            }
+          >
             <img
               onError={addDefaultSrc}
               className={`border border-black h-full ${
@@ -64,26 +71,3 @@ const SearchResultSuggation = ({ info }) => {
 };
 
 export default SearchResultSuggation;
-
-//  <div className=" h-72 w-full p-2 m-2 flex bg-blue-400 justify-center content-center ">
-//    <div className="bg-red-200 w-96 h-60">
-//      <img
-//        onError={addDefaultSrc}
-//        className="rounded-lg h-full"
-//        src={thumbnails?.high?.url}
-//        alt="Video Thumbnail"
-//      />
-//    </div>
-//    <div className="pl-2 mr-2 h-full bg-green-200 w-full justify-center overflow-auto">
-//      {/* <ul> */}
-//      {/* <li className="font-bold truncate w-full"> */}
-//      <div className="overflow-clip bg-gray-400">{title}</div> {/* </li> */}
-//      {/* <li>{channelTitle}</li> */}
-//      {/* <li> */}
-//      <div className="flex">
-//        View: {viewCount} Like: {likeCount}
-//      </div>
-//      {/* </li> */}
-//      {/* </ul> */}
-//    </div>
-//  </div>;

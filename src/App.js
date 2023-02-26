@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Body from "./components/Body";
+import ChannelContainer from "./components/Channel/ChannelContainer";
 import Head from "./components/Head";
 import MainContainer from "./components/MainContainer";
 import SearchResultContainer from "./components/SearchResult/SearchResultContainer";
@@ -39,6 +40,10 @@ const appRouter = createBrowserRouter([
       {
         path: "search",
         element: <SearchResultContainer />,
+      },
+      {
+        path: "channelname",
+        element: <ChannelContainer />,
       },
     ],
   },

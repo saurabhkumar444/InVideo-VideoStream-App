@@ -15,7 +15,6 @@ function ButtonList() {
     SetCategoryList(response);
   };
   const buttonClickHandler = async (value) => {
-    // console.log(">>>>>>value>", value);
   };
 
   return (
