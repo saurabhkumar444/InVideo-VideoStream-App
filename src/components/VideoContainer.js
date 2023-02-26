@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getvideoList } from "../Utils/ApiGenerator";
+import { openMenu } from "../Utils/appSlice";
 import VideoCard from "./VideoCard";
 
 function VideoContainer() {
+  const dispatch = useDispatch();
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    dispatch(openMenu());
     getVideo();
   }, []);
 
