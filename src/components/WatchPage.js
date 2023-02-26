@@ -2,11 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { closedMenu } from "../Utils/appSlice";
-import {
-  getSelectedVideoDetails,
-  youtubeSelectedVideo,
-  YOUTUBE_API_URL,
-} from "../Utils/ApiGenerator";
+import { getSelectedVideoDetails, getvideoList } from "../Utils/ApiGenerator";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
 import SuggationCard from "./SuggationCard";
@@ -31,9 +27,8 @@ const WatchPage = () => {
   }, [youTubeVideoId]);
 
   const getVideo = async () => {
-    const data = await fetch(YOUTUBE_API_URL);
-    const json = await data.json();
-    setVideos(json?.items);
+    const response = await getvideoList();
+    setVideos(response);
   };
 
   useEffect(() => {

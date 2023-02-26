@@ -1,5 +1,5 @@
 import React, { useDebugValue, useEffect, useState } from "react";
-import { YOUTUBE_COMMENT_API } from "../Utils/ApiGenerator";
+import { getCommentsApi } from "../Utils/ApiGenerator";
 import { addDefaultSrc } from "../Utils/commonValue";
 
 const Commont = ({ snippet }) => {
@@ -45,7 +45,7 @@ const CommentsContainer = ({ youTubeVideochannelId }) => {
   }, []);
 
   const getCommentslist = async () => {
-    const response = await YOUTUBE_COMMENT_API(youTubeVideochannelId);
+    const response = await getCommentsApi(youTubeVideochannelId);
     setCommentsList(response);
   };
 

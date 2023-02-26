@@ -47,14 +47,14 @@ function Head() {
   const getSearchSuggestions = async () => {
     if (searchValue.length < 2) return clearSearch(), setShowSuggestion(false);
     // setShowSuggestion(true);
-    const data = await fetch(youtubeSearchApi + searchValue);
-    const json = await data.json();
-    setSearchSuggestion(json[1]);
+    const response = await youtubeSearchApi(searchValue);
+
+    setSearchSuggestion(response);
     setShowSuggestion(true);
     // update in redux
     dispatch(
       cacheResult({
-        [searchValue]: json[1],
+        [searchValue]: response,
       })
     );
   };

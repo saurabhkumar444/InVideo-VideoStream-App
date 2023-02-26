@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { YOUTUBE_CATEGORY_API } from "../Utils/ApiGenerator";
+import { getCategoryApi } from "../Utils/ApiGenerator";
 import Button from "./Button";
 
 function ButtonList() {
@@ -11,11 +11,10 @@ function ButtonList() {
   }, []);
 
   const getCategory = async () => {
-    const response = await YOUTUBE_CATEGORY_API();
+    const response = await getCategoryApi();
     SetCategoryList(response);
   };
-  const buttonClickHandler = async (value) => {
-  };
+  const buttonClickHandler = async (value) => {};
 
   return (
     <div className="flex overflow-auto whitespace-nowrap m-2 scrollbar-hide ">

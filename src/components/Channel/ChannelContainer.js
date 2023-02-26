@@ -4,7 +4,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import {
   getSelectedChannelVideoList,
   getSelectedChennelDetails,
-  YOUTUBE_API_URL,
 } from "../../Utils/ApiGenerator";
 import { closedMenu } from "../../Utils/appSlice";
 import { addDefaultSrc, kFormatter } from "../../Utils/commonValue";
