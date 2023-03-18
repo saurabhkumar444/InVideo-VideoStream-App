@@ -9,10 +9,7 @@ import {
   videolist,
 } from "./demoData";
 
-// const API_KEY = "AIzaSyAI9FhAS1ilSj9RM6U8-gKJ3_CJxq89x_0";
-// const API_KEY = "AIzaSyB41wJKfLdYaTDk_4zts9izYkN64FoCDhk";
-const API_KEY = "AIzaSyBow2loALOn_ZNozHzdjWvxINBFutgEIfk";
-// const API_KEY = "AIzaSyBs6LBSX9iuWHDvBKKWmpZQGVtYvi--dmo";
+1;
 
 export const getvideoList = async () => {
   const data = await fetch(
@@ -29,6 +26,7 @@ export const youtubeSearchApi = async (searchValue) => {
       searchValue
   );
   const json = await data.json();
+  console.log(json[1]);
   return json[1];
   // return searchResult;
 };
